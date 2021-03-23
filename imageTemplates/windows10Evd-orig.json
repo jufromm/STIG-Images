@@ -52,9 +52,9 @@
           }
         },
         "properties": {
-          "buildTimeoutInMinutes": 200,
+          "buildTimeoutInMinutes": 100,
           "vmProfile": {
-            "vmSize": "Standard_D4_v3",
+            "vmSize": "Standard_D1_v2",
             "osDiskSizeGB": 127
           },
           "source": {
@@ -114,7 +114,9 @@
                 "baseosimg": "windowsclient"
               },
               "replicationRegions": [
-                "eastus"
+                "eastus",
+                "eastus2",
+                "southcentralus"
               ]
             }
           ]
