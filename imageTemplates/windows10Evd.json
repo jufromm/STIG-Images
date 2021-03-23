@@ -52,7 +52,7 @@
           }
         },
         "properties": {
-          "buildTimeoutInMinutes": 200,
+          "buildTimeoutInMinutes": 100,
           "vmProfile": {
             "vmSize": "Standard_D4_v3",
             "osDiskSizeGB": 127
