@@ -12,7 +12,7 @@
                     "osState": "Generalized",
                     "publisher": "AzureGlobalDesktop",
                     "offer": "office-365",
-                    "sku": "20h1-evd-o365pp-stig",
+                    "sku": "20h2-evd-o365pp-stig",
                     "minRecommendedvCPUs": "2",
                     "maxRecommendedvCPUs": "8",
                     "minRecommendedMemory": "32",
