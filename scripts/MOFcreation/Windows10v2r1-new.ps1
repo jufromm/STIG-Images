@@ -17,6 +17,7 @@ configuration Windows10v2r1
                     Identity = 'Guests' 
                 }
             }
+            OrgSettings = "C:\artifacts\WindowsClient-10-2.1.base.xml"
         }
         Chrome ChromeSettings
         {

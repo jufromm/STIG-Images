@@ -30,6 +30,9 @@
     "variables": {
       "setPowerStigUrl": "https://raw.githubusercontent.com/jufromm/STIG-Images/main/scripts/setPowerStig.ps1",
       "setAuditingStigUrl": "https://raw.githubusercontent.com/jufromm/STIG-Images/main/scripts/auditStig.ps1",
+      "metaMofUrl": "https://raw.githubusercontent.com/jufromm/STIG-Images/main/mof/metamof/localhostmeta.mof",
+      "orgSettingsUrl": "https://raw.githubusercontent.com/jufromm/STIG-Images/main/files/WindowsCLient-10-2.1.base.xml",
+
       "wsResourceId": "[concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/',resourceGroup().name, '/providers/','Microsoft.OperationalInsights/workspaces/', parameters('workspaceName'))]"
     },
     "resources": [
@@ -66,33 +69,47 @@
           },
           "customize": [
             {
-                "type": "PowerShell",
-                "name": "setEnvVariables",
-                "inline": [
-                  "[concat('[System.Environment]::SetEnvironmentVariable(''WORKSPACE_ID'',''',reference(resourceId('Microsoft.OperationalInsights/workspaces', parameters('workspaceName')),'2017-03-15-preview').customerId,''',[System.EnvironmentVariableTarget]::Machine)')]",
-                  "[concat('[System.Environment]::SetEnvironmentVariable(''WORKSPACE_KEY'',''',listKeys(variables('wsResourceId'), '2015-11-01-preview').primarySharedKey,''', [System.EnvironmentVariableTarget]::Machine)')]",
-                  "[concat('[System.Environment]::SetEnvironmentVariable(''POWERSTIG_VER'',''',parameters('powerStigVersion'),''', [System.EnvironmentVariableTarget]::Machine)')]",
-                  "[concat('[System.Environment]::SetEnvironmentVariable(''STIG_OSVER'',''',parameters('osVersion'),''', [System.EnvironmentVariableTarget]::Machine)')]",
-                  "[concat('[System.Environment]::SetEnvironmentVariable(''STIG_VER'',''',parameters('stigVersion'),''', [System.EnvironmentVariableTarget]::Machine)')]"
-                ]
+              "type": "PowerShell",
+              "name": "setEnvVariables",
+              "inline": [
+                "[concat('[System.Environment]::SetEnvironmentVariable(''WORKSPACE_ID'',''',reference(resourceId('Microsoft.OperationalInsights/workspaces', parameters('workspaceName')),'2017-03-15-preview').customerId,''',[System.EnvironmentVariableTarget]::Machine)')]",
+                "[concat('[System.Environment]::SetEnvironmentVariable(''WORKSPACE_KEY'',''',listKeys(variables('wsResourceId'), '2015-11-01-preview').primarySharedKey,''', [System.EnvironmentVariableTarget]::Machine)')]",
+                "[concat('[System.Environment]::SetEnvironmentVariable(''POWERSTIG_VER'',''',parameters('powerStigVersion'),''', [System.EnvironmentVariableTarget]::Machine)')]",
+                "[concat('[System.Environment]::SetEnvironmentVariable(''STIG_OSVER'',''',parameters('osVersion'),''', [System.EnvironmentVariableTarget]::Machine)')]",
+                "[concat('[System.Environment]::SetEnvironmentVariable(''STIG_VER'',''',parameters('stigVersion'),''', [System.EnvironmentVariableTarget]::Machine)')]"
+              ]
+            },
+            {
+              "type": "PowerShell",
+              "runElevated": true,
+              "name": "CreateFolder",
+              "inline": [
+                "mkdir C:\\BuildArtifacts"
+              ]
             },
             {
               "type": "File",
               "name": "mofFileDownload",
               "sourceUri": "[parameters('mofUrl')]",
-              "destination": "c:\\localhost.mof"
+              "destination": "c:\\BuildArtifacts\\localhost.mof"
             },
             {
               "type": "File",
               "name": "AuditScriptDownload",
               "sourceUri": "[variables('setAuditingStigUrl')]",
-              "destination": "c:\\auditStig.ps1"
+              "destination": "c:\\BuildArtifacts\\auditStig.ps1"
             },
             {
-              "type": "PowerShell",
-              "name": "SetUpPowerStig",
-              "runElevated": true,
-              "scriptUri": "[variables('setPowerStigUrl')]"
+              "type": "File",
+              "name": "MetaMofFileDownload",
+              "sourceUri": "[variables('metaMofUrl')]",
+              "destination": "c:\\BuildArtifacts\\localhostmeta.mof"
+            },
+            {
+              "type": "File",
+              "name": "OrgFileDownload",
+              "sourceUri": "[variables('orgSettingsUrl')]",
+              "destination": "c:\\BuildArtifacts\\WindowsCLient-10-2.1.base.xml"
             }
           ],
           "distribute": [
