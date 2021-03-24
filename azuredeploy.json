@@ -29,7 +29,7 @@
         "managedIdentityUrl": "[uri(deployment().properties.templateLink.uri, 'nested/managedIdentity.json')]",
         "imageGalleryUrl": "[uri(deployment().properties.templateLink.uri, 'nested/imageGallery.json')]",
         "win10WVDImageTemplateUrl": "[uri(deployment().properties.templateLink.uri, 'imageTemplates/windows10Evd.json')]",
-        "win10EntImageTemplateUrl": "[uri(deployment().properties.templateLink.uri, 'imageTemplates/windows10Evd.json')]",
+        "win10EntImageTemplateUrl": "[uri(deployment().properties.templateLink.uri, 'imageTemplates/windows10Ent.json')]",
         "imageDefinitionUrl": "[uri(deployment().properties.templateLink.uri, 'nested/imageDefinition.json')]",
         "win10MofUrl": "[uri(deployment().properties.templateLink.uri, 'mof/Windows10v2r1/localhost.mof')]"
     },
