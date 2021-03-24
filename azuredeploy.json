@@ -28,7 +28,8 @@
         "workspaceDashboardUrl": "[uri(deployment().properties.templateLink.uri, 'nested/dashboard.json')]",
         "managedIdentityUrl": "[uri(deployment().properties.templateLink.uri, 'nested/managedIdentity.json')]",
         "imageGalleryUrl": "[uri(deployment().properties.templateLink.uri, 'nested/imageGallery.json')]",
-        "win10mageTemplateUrl": "[uri(deployment().properties.templateLink.uri, 'imageTemplates/windows10Evd.json')]",
+        "win10WVDImageTemplateUrl": "[uri(deployment().properties.templateLink.uri, 'imageTemplates/windows10Evd.json')]",
+        "win10EntImageTemplateUrl": "[uri(deployment().properties.templateLink.uri, 'imageTemplates/windows10Evd.json')]",
         "imageDefinitionUrl": "[uri(deployment().properties.templateLink.uri, 'nested/imageDefinition.json')]",
         "win10MofUrl": "[uri(deployment().properties.templateLink.uri, 'mof/Windows10v2r1/localhost.mof')]"
     },
@@ -159,7 +160,7 @@
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "[variables('win10mageTemplateUrl')]",
+                    "uri": "[variables('win10WVDImageTemplateUrl')]",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
@@ -201,7 +202,7 @@
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "[variables('win10mageTemplateUrl')]",
+                    "uri": "[variables('win10EntImageTemplateUrl')]",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
