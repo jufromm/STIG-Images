@@ -149,7 +149,7 @@
             }
         },
         {
-            "name": "windows10STIGtemplate",
+            "name": "windows10WVDSTIGtemplate",
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2019-10-01",
             "resourceGroup": "[parameters('rgName')]",
@@ -177,6 +177,48 @@
                     },
                      "imageTemplateName": {
                          "value" :"Win10WVDw365_STIG" 
+                     },
+                     "powerStigVersion": {
+                         "value": "[parameters('powerStigVersion')]"
+                     },
+                    "stigVersion" : {
+                        "value": "2.1"
+                    },
+                    "osVersion" : {
+                        "value": "10"
+                    }
+                }
+            }
+        },
+        {
+            "name": "windows10STIGtemplate",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2019-10-01",
+            "resourceGroup": "[parameters('rgName')]",
+            "dependsOn": [
+                "imageDefinitionsDeploy"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[variables('win10mageTemplateUrl')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "identityId":{
+                        "value": "[reference('managedIdentityDeploy').outputs.identityName.value]"
+                    },
+                    "mofUrl":{
+                        "value": "[variables('win10MofUrl')]"
+                    },
+                    "galleryName":{
+                        "value": "[reference('imageGalleryDeploy').outputs.galleryName.value]"
+                    },
+                    "workspaceName": {
+                        "value": "[reference('workspaceDeploy').outputs.workspaceName.value]"
+                    },
+                     "imageTemplateName": {
+                         "value" :"Win10Ent_STIG" 
                      },
                      "powerStigVersion": {
                          "value": "[parameters('powerStigVersion')]"

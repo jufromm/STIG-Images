@@ -17,6 +17,18 @@
                     "maxRecommendedvCPUs": "8",
                     "minRecommendedMemory": "32",
                     "maxRecommendedMemory": "48"
+                },
+                {
+                    "imageDefinitionName": "Win10Ent_STIG",
+                    "osType": "Windows",
+                    "osState": "Generalized",
+                    "publisher": "AzureGlobalDesktop",
+                    "offer": "Windows-10",
+                    "sku": "20h2-ent-stig",
+                    "minRecommendedvCPUs": "2",
+                    "maxRecommendedvCPUs": "8",
+                    "minRecommendedMemory": "32",
+                    "maxRecommendedMemory": "48"
                 }
             ]
         },
